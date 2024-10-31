@@ -13,8 +13,7 @@
       background-image: url('https://www.transparenttextures.com/patterns/maze-black.png');
       background-image: url('https://www.transparenttextures.com/patterns/retina-wood.png');
       background-image: url('https://www.transparenttextures.com/patterns/dark-brick-wall.png');
-      "
-     
+    "
   >
     <nav class="bg-gray-100 dark:bg-gray-900 border-gray-400 shadow-md">
       <div
@@ -75,6 +74,7 @@
             <li>
               <a
                 href="#"
+                id="add-task"
                 class="block text-white bg-blue-700 hover:bg-blue-600 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-500 dark:focus:ring-blue-800"
                 aria-current="page"
                 >Add Task <i class="fa-solid fa-plus"></i
@@ -84,19 +84,247 @@
         </div>
       </div>
     </nav>
-    <section class="h-screen"></section>
+
+    <section
+      id="form"
+      class="absolute inset-x-1/2 origin-center -translate-x-1/2 translate-y-12 z-10 h-0 overflow-hidden box-border max-w-lg w-full flex items-center m-auto duration-500"
+    >
+      <form
+        class="w-full box-border p-2 flex flex-col gap-6 bg-slate-100 dark:bg-gray-900 border-solid border-2 border-black rounded-xl"
+      >
+        <!-- Title -->
+        <div class="flex w-full mb-4">
+          <label class="mb-2 font-bold w-2/5 self-center" for="title"
+            >Title</label
+          >
+          <input
+            class="p-2 rounded-md border-solid w-3/5 border-2 border-violet-950"
+            type="text"
+            placeholder="Title"
+            name="title"
+            id="title"
+          />
+        </div>
+
+        <!-- Description -->
+        <div class="flex w-full mb-4">
+          <label for="description" class="mb-2 font-bold w-2/5 self-center"
+            >Description</label
+          >
+          <textarea
+            name="desc"
+            class="p-2 rounded-md border-solid border-2 w-3/5 border-violet-950"
+            id="description"
+            placeholder="Description"
+          ></textarea>
+        </div>
+
+        <!-- Status -->
+        <div class="flex w-full mb-4">
+          <label for="status" class="mb-2 font-bold w-2/5 self-center"
+            >Status</label
+          >
+          <select
+            name="status"
+            class="w-3/5 p-2 rounded-md border-2 border-violet-950 text-black"
+            id="status"
+          >
+            <option value="todo">Todo</option>
+            <option value="doing">Doing</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+
+        <!-- Date and Time -->
+        <div class="flex w-full mb-4 gap-6">
+          <div class="flex-1">
+            <label for="date" class="mb-2 font-bold block">Date</label>
+            <input
+              class="p-2 rounded-md border-2 border-violet-950 w-full text-black"
+              type="date"
+              name="date"
+              id="date"
+            />
+          </div>
+          <div class="flex-1">
+            <label for="time" class="mb-2 font-bold block">Time</label>
+            <input
+              class="p-2 rounded-md border-2 border-violet-950 w-full text-black"
+              type="time"
+              name="time"
+              id="time"
+            />
+          </div>
+        </div>
+
+        <!-- Priority -->
+        <div class="flex w-full mb-4">
+          <label for="priority" class="mb-2 font-bold w-2/5 self-center"
+            >Priority</label
+          >
+          <select
+            name="priority"
+            class="w-3/5 p-2 rounded-md border-2 border-violet-950 text-black"
+            id="priority"
+          >
+            <option value="p1" class="text-red-800 bg-red-500">P1</option>
+            <option value="p2" class="text-orange-800 bg-orange-500">P2</option>
+            <option value="p3" class="text-green-800 bg-green-500">P3</option>
+          </select>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex justify-between items-center">
+          <input
+            class="text-white bg-violet-600 hover:bg-violet-700 px-4 py-2 rounded-md text-sm font-medium cursor-pointer"
+            type="button"
+            id="add-task"
+            value="Submit Tasks"
+          />
+          <input
+            class="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-sm font-medium cursor-pointer"
+            type="reset"
+            value="Reset"
+          />
+        </div>
+      </form>
+    </section>
+
+    <main
+      class="max-w-screen-xl mt-14 bg-slate-100 dark:bg-slate-900 mx-auto p-4 flex justify-between gap-4 rounded"
+    >
+      <section
+        id="todo"
+        class="bg-slate-200 p-2 dark:bg-gray-700 flex-1 rounded"
+      >
+        <div class="flex justify-between items-center">
+          <h2>To Do</h2>
+          <p>counter: <span>3</span></p>
+        </div>
+
+        <div class="cards">
+          <div class="card border-2 border-gray-600 rounded-lg p-4 mb-4 bg-white" draggable="true">
+            <!-- Date and Time -->
+            <p class="font-light text-right text-gray-500 flex justify-end items-center gap-4 mb-2">
+              <span>2024-10-31</span> 
+              <span>4:46</span>
+            </p>
+            
+            <!-- Title -->
+            <p class="text-gray-700 font-semibold text-lg mb-1">Gym</p>
+            <p class="text-gray-700 mb-4">Legs workout</p>
+            
+            <!-- Priority -->
+            <p class="inline-block p-1 rounded text-red-600 bg-red-300 border-2 border-red-600 mb-4">
+              Important
+            </p>
+        
+            <!-- Buttons -->
+            <div class="flex justify-between gap-2">
+              <button class="rounded p-2 text-yellow-500 bg-yellow-200 border-yellow-500 border-2 w-full">
+                Edit
+              </button>
+              <button class="rounded p-2 text-red-600 bg-red-300 border-2 border-red-600 w-full">
+                Delete
+              </button>
+            </div>
+          </div>
+          <div class="card border-2 border-gray-600 rounded-lg p-4 mb-4 bg-white" draggable="true">
+            <!-- Date and Time -->
+            <p class="font-light text-right text-gray-500 flex justify-end items-center gap-4 mb-2">
+              <span>2024-10-31</span> 
+              <span>4:46</span>
+            </p>
+            
+            <!-- Title -->
+            <p class="text-gray-700 font-semibold text-lg mb-1">Gym</p>
+            <p class="text-gray-700 mb-4">Legs workout</p>
+            
+            <!-- Priority -->
+            <p class="inline-block p-1 rounded text-red-600 bg-red-300 border-2 border-red-600 mb-4">
+              Important
+            </p>
+        
+            <!-- Buttons -->
+            <div class="flex justify-between gap-2">
+              <button class="rounded p-2 text-yellow-500 bg-yellow-200 border-yellow-500 border-2 w-full">
+                Edit
+              </button>
+              <button class="rounded p-2 text-red-600 bg-red-300 border-2 border-red-600 w-full">
+                Delete
+              </button>
+            </div>
+          </div>
+          <div class="card border-2 border-gray-600 rounded-lg p-4 mb-4 bg-white" draggable="true">
+            <!-- Date and Time -->
+            <p class="font-light text-right text-gray-500 flex justify-end items-center gap-4 mb-2">
+              <span>2024-10-31</span> 
+              <span>4:46</span>
+            </p>
+            
+            <!-- Title -->
+            <p class="text-gray-700 font-semibold text-lg mb-1">Gym</p>
+            <p class="text-gray-700 mb-4">Legs workout</p>
+            
+            <!-- Priority -->
+            <p class="inline-block p-1 rounded text-red-600 bg-red-300 border-2 border-red-600 mb-4">
+              Important
+            </p>
+        
+            <!-- Buttons -->
+            <div class="flex justify-between gap-2">
+              <button class="rounded p-2 text-yellow-500 bg-yellow-200 border-yellow-500 border-2 w-full">
+                Edit
+              </button>
+              <button class="rounded p-2 text-red-600 bg-red-300 border-2 border-red-600 w-full">
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+
+
+
+
+      <section
+        id="doing"
+        class="bg-slate-200 p-2 dark:bg-gray-700 flex-1 rounded"
+      >
+        <div class="flex justify-between items-center">
+          <h2>Doing</h2>
+          <p>counter: <span>0</span></p>
+        </div>
+      </section>
+      <section
+        id="done"
+        class="bg-slate-200 p-2 dark:bg-gray-700 flex-1 rounded"
+      >
+        <div class="flex justify-between items-center">
+          <h2>Done</h2>
+          <p>counter: <span>0</span></p>
+        </div>
+      </section>
+    </main>
+
+    <!-- section for test  -->
+    <!-- <section class="h-screen"></section> -->
 
     <script type="module" src="./main.js"></script>
     <script>
-//       document.addEventListener('DOMContentLoaded', () => {
-//     const burger = document.querySelector('.burger');
-//     const nav = document.querySelector('.nav-links');
+      //       document.addEventListener('DOMContentLoaded', () => {
+      //     const burger = document.querySelector('.burger');
+      //     const nav = document.querySelector('.nav-links');
 
-//     burger.addEventListener('click', () => {
-//         nav.classList.toggle('nav-active');
-//         burger.classList.toggle('toggle');
-//     });
-// });
+      //     burger.addEventListener('click', () => {
+      //         nav.classList.toggle('nav-active');
+      //         burger.classList.toggle('toggle');
+      //     });
+      // });
     </script>
   </body>
 </html>

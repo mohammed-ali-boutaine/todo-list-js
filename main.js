@@ -2,6 +2,23 @@ import "./style.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { v4 as uuidv4 } from "uuid";
 
+
+const form = document.getElementById("form")
+
+document.getElementById("add-task").addEventListener("click", (event) => {
+  // event.stopPropagation(); // Prevent body click event from firing immediately
+  form.classList.toggle("h-0");
+  // form.classList.toggle("overflow-hidden");
+  // form.classList.toggle("p-3");
+});
+
+// document.querySelector("body").addEventListener("click", () => {
+//   form.classList.remove("h-0");
+//   form.classList.remove("overflow-hidden");
+//   form.classList.remove("p-3");
+// });
+
+
 // dark mode stuff
 // Check and apply the user's stored preference or the system preference on page load
 if (
@@ -92,11 +109,21 @@ function deleteAll() {
 
 function deleteOne(id) {
   console.log(id);
-  console.log("tetx");
+
 
   tasks = tasks.filter((task) => task.id != id);
   showData();
 }
+
+const deleteBtns = document.querySelectorAll(".delete-btn")
+for(let element of deleteBtns){
+  element.addEventListener("click",()=>{
+    console.log(element.id)
+    const id = element.id
+    deleteOne(id)
+  })
+}
+
 // show data
 function showData() {
   const ul = document.createElement("li");
@@ -115,7 +142,7 @@ function showData() {
                 </div>
                 <div class="flex gap-2">
                   <button class="text-white bg-green-500 hover:bg-green-600  px-3 py-1 rounded-md">Edit</button>
-                  <button onclick=' deleteOne( ${task.id} )' class="text-white bg-red-500 hover:bg-red-600 px-3 py-1 rounded-md">Delete</button>
+                  <button id="${task.id}" class=" delete-btn text-white bg-red-500 hover:bg-red-600 px-3 py-1 rounded-md">Delete</button>
                 </div>
               </li>
                 `;
