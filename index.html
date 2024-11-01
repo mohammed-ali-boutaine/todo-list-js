@@ -85,13 +85,26 @@
       </div>
     </nav>
 
+
+
+
+
+
+
+
+
+
+
+
+    <!-- -------------   form section   -->
     <section
       id="form"
-      class="absolute inset-x-1/2 origin-center -translate-x-1/2 translate-y-12 z-10 h-0 overflow-hidden box-border max-w-lg w-full flex items-center m-auto duration-500"
+      class="absolute shadow-xl inset-x-1/2 origin-center -translate-x-1/2 translate-y-12 z-10 h-0 overflow-hidden box-border max-w-lg w-full flex items-center m-auto duration-500 rounded-xl"
     >
       <form
         class="w-full box-border p-2 flex flex-col gap-6 bg-slate-100 dark:bg-gray-900 border-solid border-2 border-black rounded-xl"
       >
+      <input type="text" id="" class="hidden">
         <!-- Title -->
         <div class="flex w-full mb-4">
           <label class="mb-2 font-bold w-2/5 self-center" for="title"
@@ -128,6 +141,7 @@
             name="status"
             class="w-3/5 p-2 rounded-md border-2 border-violet-950 text-black"
             id="status"
+            
           >
             <option value="todo">Todo</option>
             <option value="doing">Doing</option>
@@ -178,7 +192,7 @@
           <input
             class="text-white bg-violet-600 hover:bg-violet-700 px-4 py-2 rounded-md text-sm font-medium cursor-pointer"
             type="button"
-            id="add-task"
+            id="submit-task"
             value="Submit Tasks"
           />
           <input
@@ -189,8 +203,24 @@
         </div>
       </form>
     </section>
+    <!-- -------------   form section  end  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <main
+    id="sections-container"
       class="max-w-screen-xl mt-14 bg-slate-100 dark:bg-slate-900 mx-auto p-4 flex justify-between gap-4 rounded"
     >
       <section
@@ -199,97 +229,15 @@
       >
         <div class="flex justify-between items-center">
           <h2>To Do</h2>
-          <p>counter: <span>3</span></p>
+          <p>counter: <span id="todo-counter">3</span></p>
         </div>
 
         <div class="cards">
-          <div class="card border-2 border-gray-600 rounded-lg p-4 mb-4 bg-white" draggable="true">
-            <!-- Date and Time -->
-            <p class="font-light text-right text-gray-500 flex justify-end items-center gap-4 mb-2">
-              <span>2024-10-31</span> 
-              <span>4:46</span>
-            </p>
-            
-            <!-- Title -->
-            <p class="text-gray-700 font-semibold text-lg mb-1">Gym</p>
-            <p class="text-gray-700 mb-4">Legs workout</p>
-            
-            <!-- Priority -->
-            <p class="inline-block p-1 rounded text-red-600 bg-red-300 border-2 border-red-600 mb-4">
-              Important
-            </p>
+         
         
-            <!-- Buttons -->
-            <div class="flex justify-between gap-2">
-              <button class="rounded p-2 text-yellow-500 bg-yellow-200 border-yellow-500 border-2 w-full">
-                Edit
-              </button>
-              <button class="rounded p-2 text-red-600 bg-red-300 border-2 border-red-600 w-full">
-                Delete
-              </button>
-            </div>
-          </div>
-          <div class="card border-2 border-gray-600 rounded-lg p-4 mb-4 bg-white" draggable="true">
-            <!-- Date and Time -->
-            <p class="font-light text-right text-gray-500 flex justify-end items-center gap-4 mb-2">
-              <span>2024-10-31</span> 
-              <span>4:46</span>
-            </p>
-            
-            <!-- Title -->
-            <p class="text-gray-700 font-semibold text-lg mb-1">Gym</p>
-            <p class="text-gray-700 mb-4">Legs workout</p>
-            
-            <!-- Priority -->
-            <p class="inline-block p-1 rounded text-red-600 bg-red-300 border-2 border-red-600 mb-4">
-              Important
-            </p>
-        
-            <!-- Buttons -->
-            <div class="flex justify-between gap-2">
-              <button class="rounded p-2 text-yellow-500 bg-yellow-200 border-yellow-500 border-2 w-full">
-                Edit
-              </button>
-              <button class="rounded p-2 text-red-600 bg-red-300 border-2 border-red-600 w-full">
-                Delete
-              </button>
-            </div>
-          </div>
-          <div class="card border-2 border-gray-600 rounded-lg p-4 mb-4 bg-white" draggable="true">
-            <!-- Date and Time -->
-            <p class="font-light text-right text-gray-500 flex justify-end items-center gap-4 mb-2">
-              <span>2024-10-31</span> 
-              <span>4:46</span>
-            </p>
-            
-            <!-- Title -->
-            <p class="text-gray-700 font-semibold text-lg mb-1">Gym</p>
-            <p class="text-gray-700 mb-4">Legs workout</p>
-            
-            <!-- Priority -->
-            <p class="inline-block p-1 rounded text-red-600 bg-red-300 border-2 border-red-600 mb-4">
-              Important
-            </p>
-        
-            <!-- Buttons -->
-            <div class="flex justify-between gap-2">
-              <button class="rounded p-2 text-yellow-500 bg-yellow-200 border-yellow-500 border-2 w-full">
-                Edit
-              </button>
-              <button class="rounded p-2 text-red-600 bg-red-300 border-2 border-red-600 w-full">
-                Delete
-              </button>
-            </div>
-          </div>
+         
         </div>
       </section>
-
-
-
-
-
-
-
 
       <section
         id="doing"
@@ -297,7 +245,7 @@
       >
         <div class="flex justify-between items-center">
           <h2>Doing</h2>
-          <p>counter: <span>0</span></p>
+          <p>counter: <span  id="doing-counter">0</span></p>
         </div>
       </section>
       <section
@@ -306,7 +254,7 @@
       >
         <div class="flex justify-between items-center">
           <h2>Done</h2>
-          <p>counter: <span>0</span></p>
+          <p>counter: <span  id="done-counter">0</span></p>
         </div>
       </section>
     </main>
