@@ -2,6 +2,15 @@ import "./style.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { v4 as uuidv4 } from "uuid";
 
+
+// menu
+
+document.getElementById("menu").addEventListener("click",()=>{
+  document.getElementById("navbar-default")
+  .classList.toggle("hidden")
+})
+
+
 // ------------------------------------
 const todoSection = document.getElementById("todo");
 const doingSection = document.getElementById("doing");
