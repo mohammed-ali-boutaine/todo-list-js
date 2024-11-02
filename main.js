@@ -2,25 +2,42 @@ import "./style.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { v4 as uuidv4 } from "uuid";
 
-
+// counter
+function updateCounter() {
+  document.getElementById("todo-counter").textContent = tasks.todo.length;
+  document.getElementById("doing-counter").textContent = tasks.doing.length;
+  document.getElementById("done-counter").textContent = tasks.done.length;
+  // console.log("counetr gunction");
+}
 // menu
 
-document.getElementById("menu").addEventListener("click",()=>{
-  document.getElementById("navbar-default")
-  .classList.toggle("hidden")
-})
-
+document.getElementById("menu").addEventListener("click", () => {
+  document.getElementById("navbar-default").classList.toggle("hidden");
+});
 
 // ------------------------------------
-const todoSection = document.getElementById("todo");
-const doingSection = document.getElementById("doing");
-const doneSection = document.getElementById("done");
+const todoSection = document.querySelector("#todo .cards");
+const doingSection = document.querySelector("#doing .cards");
+const doneSection = document.querySelector("#done .cards");
 
 // ------------------------------------
 const form = document.getElementById("form");
 
 document.getElementById("add-task").addEventListener("click", (event) => {
-  form.classList.toggle("h-0");
+  form.classList.toggle("hidden");
+  document.body.classList.toggle("transparent-body");
+  document.getElementById("nav").style.opacity = 0.8;
+  document.getElementById("sections-container").style.opacity = 0.8;
+});
+document.getElementById("submit-task").addEventListener("click", function () {
+  // this.enterKeyHint.predefualt()
+  // document.getElementById('form').style.display = 'none';
+  form.classList.add("hidden");
+
+  document.body.classList.remove("transparent-body");
+  document.getElementById("nav").classList.remove("transparent-body");
+  document.getElementById("nav").style.opacity = 1;
+  document.getElementById("sections-container").style.opacity = 1;
 });
 
 // dark mode stuff
@@ -82,12 +99,25 @@ if (!tasks) {
 // show data function:
 function showData() {
   for (let key in tasks) {
+    // let div = document.createElement("div");
+
     if (tasks[key].length !== 0) {
       const sectionCards = tasks[key]
         .map((task) => {
+          let priorityClasses = "";
+          const color =""
+
+          if (task.priority === "p1") {
+            priorityClasses = 'border-red-600 bg-red-100';
+          } else if (task.priority === "p2") {
+            priorityClasses = 'border-orange-600 bg-orange-100';
+          } else if (task.priority === "p3") {
+            priorityClasses = 'border-green-600 bg-green-100';
+          }
+
           return `
           <div
-             class="card border-2 border-gray-600 rounded-lg px-4 pt-4 mb-4 bg-white dark:bg-slate-500"
+               class="pop-up box-border duration-500 card border-2 rounded-lg px-4 pt-4 mb-4 bg-white dark:bg-slate-500 ${priorityClasses} dark:bg-slate-500"
              draggable="true"
            >
              <!-- Date and Time -->
@@ -101,12 +131,12 @@ function showData() {
              <p class="text-gray-700 mb-4">${task.description}</p>
    
              <!-- Priority -->
-             <p class="inline-block p-1 rounded text-red-600 bg-red-300 border-2 border-red-600 mb-4">
+             <p class="inline-block p-1 rounded ${priorityClasses} mb-4">
                ${task.priority}
              </p>
    
              <!-- Buttons -->
-             <div class="flex justify-between gap-2 border-t-2 -mx-4 px-4 py-2">
+             <div class=" box-border flex justify-between gap-2 border-t-2 -mx-4 px-4 py-2">
                <button class="inline-block rounded-md bg-yellow-500 px-6 py-2 font-semibold text-green-100 shadow-md duration-75 hover:bg-yellow-400">Edit</button>
                <button id="${task.id}" class="inline-block rounded-md bg-red-500 px-6 py-2 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400 delete-btn">Delete</button>
              </div>
@@ -114,17 +144,22 @@ function showData() {
           `;
         })
         .join("");
-
+      // div.innerHTML = sectionCards;
       if (key === "todo") {
-        todoSection.innerHTML += sectionCards;
+        // todoSection.appendChild(div);
+        todoSection.innerHTML = sectionCards;
       } else if (key === "doing") {
-        doingSection.innerHTML += sectionCards;
+        // doingSection.appendChild(div);
+        doingSection.innerHTML = sectionCards;
       } else if (key === "done") {
-        doneSection.innerHTML += sectionCards;
+        // doneSection.appendChild(div);
+        doneSection.innerHTML = sectionCards;
       } else {
         console.error("wrong key in tasks object");
       }
     }
+
+    updateCounter();
   }
 
   // Add event listeners for delete buttons
@@ -139,6 +174,9 @@ function showData() {
       // Remove the task from the DOM
       const taskCard = event.target.closest(".card");
       if (taskCard) {
+        updateCounter();
+        taskCard.style.height = "100px";
+        taskCard.style.opacity = 0.7;
         taskCard.remove();
       }
 
@@ -181,42 +219,32 @@ function addTask() {
   showData();
 }
 
-function deleteOne(id) {
-  console.log(id);
+// function deleteOne(id) {
+//   console.log(id);
 
-  // Check in each category (todo, doing, done) and filter out the task with the given id
-  tasks.todo = tasks.todo.filter((task) => task.id != id);
-  tasks.doing = tasks.doing.filter((task) => task.id != id);
-  tasks.done = tasks.done.filter((task) => task.id != id);
+//   // Check in each category (todo, doing, done) and filter out the task with the given id
+//   tasks.todo = tasks.todo.filter((task) => task.id != id);
+//   tasks.doing = tasks.doing.filter((task) => task.id != id);
+//   tasks.done = tasks.done.filter((task) => task.id != id);
 
-  // Save updated tasks object to localStorage
-  localStorage.setItem("tasks", JSON.stringify(tasks));
-  showData();
-}
-document.querySelectorAll(".delete-btn").forEach((button) => {
-  button.addEventListener("click", (event) => {
-    const taskId = event.target.id;
-    deleteOne(taskId);  // Use the deleteOne function to handle deletion
-
-    // Optionally, remove the task card from the DOM immediately for smoother UX
-    const taskCard = event.target.closest(".card");
-    if (taskCard) {
-      taskCard.remove();
-    }
-  });
-});
-
-
-// const deleteBtns = document.querySelectorAll(".delete-btn");
-// for (let element of deleteBtns) {
-//   element.addEventListener("click", () => {
-//     console.log(element.id);
-//     const id = element.id;
-//     deleteOne(id);
-//   });
+//   // Save updated tasks object to localStorage
+//   localStorage.setItem("tasks", JSON.stringify(tasks));
+//   // showData();
 // }
-
-// show data
+// document.querySelectorAll(".delete-btn").forEach((button) => {
+//   button.addEventListener("click", (event) => {
+//     const taskId = event.target.id;
+//     deleteOne(taskId); // Use the deleteOne function to handle deletion
+//     updateCounter();
+//     // Optionally, remove the task card from the DOM immediately for smoother UX
+//     const taskCard = event.target.closest(".card");
+//     if (taskCard) {
+//       taskCard.style.height="100px"
+//       taskCard.style.opacity=0.8
+//       // taskCard.remove();
+//     }
+//   });
+// });
 
 // add events
 submitBtn.addEventListener("click", addTask);

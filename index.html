@@ -6,16 +6,36 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Flow</title>
+    <style>
+      @keyframes pop-up {
+        0% {
+          transform: scale(0.5);
+          opacity: 0;
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      .pop-up {
+        animation: pop-up 0.5s ease-out;
+      }
+      
+      .transparent-body {
+        background-color: rgba(18, 18, 18, 0.615);
+      }
+      
+    </style>
   </head>
   <body
-    class="dark:bg-gray-700 dark:text-white bg-fixed"
+    class="dark:bg-gray-700 dark:text-white bg-fixed min-h-screen px-4 py-4"
     style="
       background-image: url('https://www.transparenttextures.com/patterns/maze-black.png');
       background-image: url('https://www.transparenttextures.com/patterns/retina-wood.png');
       background-image: url('https://www.transparenttextures.com/patterns/dark-brick-wall.png');
     "
   >
-    <nav class="bg-gray-100 dark:bg-gray-900 border-gray-400 shadow-md">
+    <nav id="nav" class="bg-gray-100 dark:bg-gray-900 border-gray-400 rounded-3xl shadow-lg">
       <div
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
       >
@@ -52,7 +72,7 @@
         </button>
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul
-            class="font-medium flex flex-col gap-4 p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gzdqray-800 md:dark:bg-gzqdray-900 dark:border-gray-700"
+            class="font-medium flex flex-col  gap-y-4 p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gzdqray-800 md:dark:bg-gzqdray-900 dark:border-gray-700"
           >
             <li>
               <a
@@ -99,111 +119,109 @@
 
     <!-- -------------   form section   -->
     <section
-      id="form"
-      class="absolute shadow-xl inset-x-1/2 origin-center -translate-x-1/2 translate-y-12 z-10 h-0 overflow-hidden box-border max-w-lg w-full flex items-center m-auto duration-500 rounded-xl"
+    id="form"
+    class="pop-up hidden duration-300 absolute shadow-xl overflow-hidden box-border inset-x-0 mx-auto mt-4 z-10 max-w-lg w-full  bg-white dark:bg-gray-800 rounded-xl"
+  >
+    <form
+      class="w-full flex flex-col gap-4 bg-slate-100 dark:bg-gray-900 p-4 border border-gray-300 dark:border-gray-700 rounded-xl"
     >
-      <form
-        class="w-full box-border p-2 flex flex-col gap-6 bg-slate-100 dark:bg-gray-900 border-solid border-2 border-black rounded-xl"
-      >
       <input type="text" id="" class="hidden">
-        <!-- Title -->
-        <div class="flex w-full mb-4">
-          <label class="mb-2 font-bold w-2/5 self-center" for="title"
-            >Title</label
-          >
+      
+      <!-- Title -->
+      <div class="flex flex-col mb-2">
+        <label class="mb-2 font-bold text-gray-700 dark:text-gray-300" for="title">Title</label>
+        <input
+          class="p-2 rounded-md border border-gray-300 dark:border-gray-700"
+          type="text"
+          placeholder="Title"
+          name="title"
+          id="title"
+           
+        />
+      </div>
+  
+      <!-- Description -->
+      <div class="flex flex-col mb-2">
+        <label for="description" class="mb-2 font-bold text-gray-700 dark:text-gray-300">Description</label>
+        <textarea
+          name="desc"
+          class="p-2 rounded-md border border-gray-300 dark:border-gray-700"
+          id="description"
+          placeholder="Description"
+           
+        ></textarea>
+      </div>
+  
+      <!-- Status -->
+      <div class="flex flex-col mb-2">
+        <label for="status" class="mb-2 font-bold text-gray-700 dark:text-gray-300">Status</label>
+        <select
+          name="status"
+          class="p-2 rounded-md border border-gray-300 dark:border-gray-700"
+          id="status"
+           
+        >
+          <option value="todo">Todo</option>
+          <option value="doing">Doing</option>
+          <option value="done">Done</option>
+        </select>
+      </div>
+  
+      <!-- Date and Time -->
+      <div class="flex flex-col md:flex-row gap-4 mb-2">
+        <div class="flex-1">
+          <label for="date" class="mb-2 font-bold text-gray-700 dark:text-gray-300 block">Date</label>
           <input
-            class="p-2 rounded-md border-solid w-3/5 border-2 border-violet-950"
-            type="text"
-            placeholder="Title"
-            name="title"
-            id="title"
+            class="p-2 rounded-md border border-gray-300 dark:border-gray-700 w-full"
+            type="date"
+            name="date"
+            id="date"
+             
           />
         </div>
-
-        <!-- Description -->
-        <div class="flex w-full mb-4">
-          <label for="description" class="mb-2 font-bold w-2/5 self-center"
-            >Description</label
-          >
-          <textarea
-            name="desc"
-            class="p-2 rounded-md border-solid border-2 w-3/5 border-violet-950"
-            id="description"
-            placeholder="Description"
-          ></textarea>
-        </div>
-
-        <!-- Status -->
-        <div class="flex w-full mb-4">
-          <label for="status" class="mb-2 font-bold w-2/5 self-center"
-            >Status</label
-          >
-          <select
-            name="status"
-            class="w-3/5 p-2 rounded-md border-2 border-violet-950 text-black"
-            id="status"
-            
-          >
-            <option value="todo">Todo</option>
-            <option value="doing">Doing</option>
-            <option value="done">Done</option>
-          </select>
-        </div>
-
-        <!-- Date and Time -->
-        <div class="flex w-full mb-4 gap-6">
-          <div class="flex-1">
-            <label for="date" class="mb-2 font-bold block">Date</label>
-            <input
-              class="p-2 rounded-md border-2 border-violet-950 w-full text-black"
-              type="date"
-              name="date"
-              id="date"
-            />
-          </div>
-          <div class="flex-1">
-            <label for="time" class="mb-2 font-bold block">Time</label>
-            <input
-              class="p-2 rounded-md border-2 border-violet-950 w-full text-black"
-              type="time"
-              name="time"
-              id="time"
-            />
-          </div>
-        </div>
-
-        <!-- Priority -->
-        <div class="flex w-full mb-4">
-          <label for="priority" class="mb-2 font-bold w-2/5 self-center"
-            >Priority</label
-          >
-          <select
-            name="priority"
-            class="w-3/5 p-2 rounded-md border-2 border-violet-950 text-black"
-            id="priority"
-          >
-            <option value="p1" class="text-red-800 bg-red-500">P1</option>
-            <option value="p2" class="text-orange-800 bg-orange-500">P2</option>
-            <option value="p3" class="text-green-800 bg-green-500">P3</option>
-          </select>
-        </div>
-
-        <!-- Buttons -->
-        <div class="flex justify-between items-center">
+        <div class="flex-1">
+          <label for="time" class="mb-2 font-bold text-gray-700 dark:text-gray-300 block">Time</label>
           <input
-            class="text-white bg-violet-600 hover:bg-violet-700 px-4 py-2 rounded-md text-sm font-medium cursor-pointer"
-            type="button"
-            id="submit-task"
-            value="Submit Tasks"
-          />
-          <input
-            class="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-sm font-medium cursor-pointer"
-            type="reset"
-            value="Reset"
+            class="p-2 rounded-md border border-gray-300 dark:border-gray-700 w-full"
+            type="time"
+            name="time"
+            id="time"
+             
           />
         </div>
-      </form>
-    </section>
+      </div>
+  
+      <!-- Priority -->
+      <div class="flex flex-col mb-2">
+        <label for="priority" class="mb-2 font-bold text-gray-700 dark:text-gray-300">Priority</label>
+        <select
+          name="priority"
+          class="p-2 rounded-md border border-gray-300 dark:border-gray-700"
+          id="priority"
+           
+        >
+          <option value="p1" class="text-red-800 bg-red-500">P1</option>
+          <option value="p2" class="text-orange-800 bg-orange-500">P2</option>
+          <option value="p3" class="text-green-800 bg-green-500">P3</option>
+        </select>
+      </div>
+  
+      <!-- Buttons -->
+      <div class="flex justify-between items-center">
+        <input
+          class="text-white bg-violet-600 hover:bg-violet-700 px-4 py-2 rounded-md text-sm font-medium cursor-pointer"
+          type="submit"
+          id="submit-task"
+          value="Submit Tasks"
+        />
+        <input
+          class="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-sm font-medium cursor-pointer"
+          type="reset"
+          value="Reset"
+        />
+      </div>
+    </form>
+  </section>
     <!-- -------------   form section  end  -->
 
 
@@ -228,12 +246,12 @@
         id="todo"
         class="bg-slate-200 p-2 dark:bg-gray-700 flex-1 rounded"
       >
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between items-center border-b-2 border-slate-600 mb-5">
           <h2>To Do</h2>
           <p>counter: <span id="todo-counter">3</span></p>
         </div>
 
-        <div class="cards">
+        <div class="cards min-h-52">
          
         
          
@@ -244,19 +262,33 @@
         id="doing"
         class="bg-slate-200 p-2 dark:bg-gray-700 flex-1 rounded"
       >
-        <div class="flex justify-between items-center">
-          <h2>Doing</h2>
-          <p>counter: <span  id="doing-counter">0</span></p>
-        </div>
+      <div class="flex justify-between items-center border-b-2 border-slate-600 mb-5">
+        <h2>To Do</h2>
+        <p>counter: <span id="doing-counter">3</span></p>
+      </div>
+
+      <div class="cards">
+       
+      
+       
+      </div>
       </section>
+
+
       <section
         id="done"
-        class="bg-slate-200 p-2 dark:bg-gray-700 flex-1 rounded"
+        class="bg-slate-200 p-2 dark:bg-gray-700 flex-1 rounded "
       >
-        <div class="flex justify-between items-center">
-          <h2>Done</h2>
-          <p>counter: <span  id="done-counter">0</span></p>
-        </div>
+      <div class="flex justify-between items-center border-b-2 border-slate-600 mb-5">
+        <h2>To Do</h2>
+        <p>counter: <span id="done-counter">3</span></p>
+      </div>
+
+      <div class="cards">
+       
+      
+       
+      </div>
       </section>
     </main>
 
