@@ -104,21 +104,27 @@ function showData() {
     if (tasks[key].length !== 0) {
       const sectionCards = tasks[key]
         .map((task) => {
-          let priorityClasses = "";
-          const color =""
+          // let priorityClasses = "";
+          let color =" "
 
           if (task.priority === "p1") {
-            priorityClasses = 'border-red-600 bg-red-100';
+            // priorityClasses = 'border-red-600 bg-red-100';
+            color = "red"
           } else if (task.priority === "p2") {
-            priorityClasses = 'border-orange-600 bg-orange-100';
+            // priorityClasses = 'border-orange-600 bg-orange-100';
+            color = "orange"
+
           } else if (task.priority === "p3") {
-            priorityClasses = 'border-green-600 bg-green-100';
+            // priorityClasses = 'border-green-600 bg-green-100';
+            color = "green"
+
           }
 
           return `
           <div
-               class="pop-up box-border duration-500 card border-2 rounded-lg px-4 pt-4 mb-4 bg-white dark:bg-slate-500 ${priorityClasses} dark:bg-slate-500"
+               class="${task.status} pop-up box-border duration-500 card border-2 rounded-lg px-4 pt-4 mb-4 border-${color}-600 bg-${color}-300 bg-${color}-300"
              draggable="true"
+             id="card${task.id}"
            >
              <!-- Date and Time -->
              <p class="font-light text-right text-gray-500 flex justify-end items-center gap-4 mb-2">
@@ -131,7 +137,7 @@ function showData() {
              <p class="text-gray-700 mb-4">${task.description}</p>
    
              <!-- Priority -->
-             <p class="inline-block p-1 rounded ${priorityClasses} mb-4">
+             <p class="inline-block p-1 rounded bg-${color}-600 text-${color}-600 mb-4">
                ${task.priority}
              </p>
    
@@ -180,13 +186,11 @@ function showData() {
         taskCard.remove();
       }
 
-      // removed this and just delete current card from dom
-      //  showData();
+      
     });
   });
 }
 
-// Initial call to display data
 
 // add tasks precedure
 function addTask() {
@@ -199,19 +203,13 @@ function addTask() {
     time: time.value,
     priority: priority.value,
   };
-
-  console.log("task:", task);
-  console.log("tasks:", tasks);
-
+ 
+  // rest form
   title.value = "";
   description.value = "";
-  // status.value = "";
   date.value = "";
   time.value = "";
-  // priority.value = "";
 
-  // tasks.push(task);
-  console.log(task.status);
 
   tasks[task.status].push(task);
 
@@ -219,35 +217,58 @@ function addTask() {
   showData();
 }
 
-// function deleteOne(id) {
-//   console.log(id);
-
-//   // Check in each category (todo, doing, done) and filter out the task with the given id
-//   tasks.todo = tasks.todo.filter((task) => task.id != id);
-//   tasks.doing = tasks.doing.filter((task) => task.id != id);
-//   tasks.done = tasks.done.filter((task) => task.id != id);
-
-//   // Save updated tasks object to localStorage
-//   localStorage.setItem("tasks", JSON.stringify(tasks));
-//   // showData();
-// }
-// document.querySelectorAll(".delete-btn").forEach((button) => {
-//   button.addEventListener("click", (event) => {
-//     const taskId = event.target.id;
-//     deleteOne(taskId); // Use the deleteOne function to handle deletion
-//     updateCounter();
-//     // Optionally, remove the task card from the DOM immediately for smoother UX
-//     const taskCard = event.target.closest(".card");
-//     if (taskCard) {
-//       taskCard.style.height="100px"
-//       taskCard.style.opacity=0.8
-//       // taskCard.remove();
-//     }
-//   });
-// });
-
 // add events
 submitBtn.addEventListener("click", addTask);
 // showData();
 
 showData();
+
+
+
+document.querySelectorAll(".card").forEach( (element)=>{
+  element.addEventListener("dragstart",function(ev){
+    ev.dataTransfer.setData("text", ev.target.id);
+
+
+  })
+} )
+
+
+document.querySelectorAll("main > section").forEach( element =>{
+  element.addEventListener("ondragover",(ev)=>{
+    allowDrop(ev)
+  })
+  element.addEventListener("ondrop",(ev)=>{
+    drop(ev)
+  })
+})
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  ev.target.appendChild(document.getElementById(data));
+
+  const id = data.replace("card","")
+  const oldState = document.getElementById(data)
+  console.log(oldState);
+  
+  const newState = ev.target.id;
+
+
+  
+
+  
+  for (let key in tasks) {
+
+    let currentTask = tasks[key].find( task => task.id == id)
+    console.log(currentTask);
+    
+
+  }
+}

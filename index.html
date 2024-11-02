@@ -20,11 +20,10 @@
       .pop-up {
         animation: pop-up 0.5s ease-out;
       }
-      
+
       .transparent-body {
         background-color: rgba(18, 18, 18, 0.615);
       }
-      
     </style>
   </head>
   <body
@@ -35,7 +34,10 @@
       background-image: url('https://www.transparenttextures.com/patterns/dark-brick-wall.png');
     "
   >
-    <nav id="nav" class="bg-gray-100 dark:bg-gray-900 border-gray-400 rounded-3xl shadow-lg">
+    <nav
+      id="nav"
+      class="bg-gray-100 dark:bg-gray-900 border-gray-400 rounded-3xl shadow-lg"
+    >
       <div
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
       >
@@ -46,7 +48,7 @@
           <img src="./public/logo.png" class="h-12 w-20" alt="Flowbite Logo" />
         </a>
         <button
-        id="menu"
+          id="menu"
           data-collapse-toggle="navbar-default"
           type="button"
           class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -72,7 +74,7 @@
         </button>
         <div class="hidden w-full md:block md:w-auto" id="navbar-default">
           <ul
-            class="font-medium flex flex-col  gap-y-4 p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gzdqray-800 md:dark:bg-gzqdray-900 dark:border-gray-700"
+            class="font-medium flex flex-col gap-y-4 p-4 md:p-0 mt-4 border border-gray-100 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 dark:bg-gzdqray-800 md:dark:bg-gzqdray-900 dark:border-gray-700"
           >
             <li>
               <a
@@ -106,189 +108,183 @@
       </div>
     </nav>
 
-
-
-
-
-
-
-
-
-
-
-
     <!-- -------------   form section   -->
     <section
-    id="form"
-    class="pop-up hidden duration-300 absolute shadow-xl overflow-hidden box-border inset-x-0 mx-auto mt-4 z-10 max-w-lg w-full  bg-white dark:bg-gray-800 rounded-xl"
-  >
-    <form
-      class="w-full flex flex-col gap-4 bg-slate-100 dark:bg-gray-900 p-4 border border-gray-300 dark:border-gray-700 rounded-xl"
+      id="form"
+      class="pop-up hidden duration-300 absolute shadow-xl overflow-hidden box-border inset-x-0 mx-auto mt-4 z-10 max-w-lg w-full bg-white dark:bg-gray-800 rounded-xl"
     >
-      <input type="text" id="" class="hidden">
-      
-      <!-- Title -->
-      <div class="flex flex-col mb-2">
-        <label class="mb-2 font-bold text-gray-700 dark:text-gray-300" for="title">Title</label>
-        <input
-          class="p-2 rounded-md border border-gray-300 dark:border-gray-700"
-          type="text"
-          placeholder="Title"
-          name="title"
-          id="title"
-           
-        />
-      </div>
-  
-      <!-- Description -->
-      <div class="flex flex-col mb-2">
-        <label for="description" class="mb-2 font-bold text-gray-700 dark:text-gray-300">Description</label>
-        <textarea
-          name="desc"
-          class="p-2 rounded-md border border-gray-300 dark:border-gray-700"
-          id="description"
-          placeholder="Description"
-           
-        ></textarea>
-      </div>
-  
-      <!-- Status -->
-      <div class="flex flex-col mb-2">
-        <label for="status" class="mb-2 font-bold text-gray-700 dark:text-gray-300">Status</label>
-        <select
-          name="status"
-          class="p-2 rounded-md border border-gray-300 dark:border-gray-700"
-          id="status"
-           
-        >
-          <option value="todo">Todo</option>
-          <option value="doing">Doing</option>
-          <option value="done">Done</option>
-        </select>
-      </div>
-  
-      <!-- Date and Time -->
-      <div class="flex flex-col md:flex-row gap-4 mb-2">
-        <div class="flex-1">
-          <label for="date" class="mb-2 font-bold text-gray-700 dark:text-gray-300 block">Date</label>
+      <form
+        class="w-full flex flex-col gap-4 bg-slate-100 dark:bg-gray-900 p-4 border border-gray-300 dark:border-gray-700 rounded-xl"
+      >
+        <input type="text" id="" class="hidden" />
+
+        <!-- Title -->
+        <div class="flex flex-col mb-2">
+          <label
+            class="mb-2 font-bold text-gray-700 dark:text-gray-300"
+            for="title"
+            >Title</label
+          >
           <input
-            class="p-2 rounded-md border border-gray-300 dark:border-gray-700 w-full"
-            type="date"
-            name="date"
-            id="date"
-             
+            class="p-2 rounded-md border border-gray-300 dark:border-gray-700"
+            type="text"
+            placeholder="Title"
+            name="title"
+            id="title"
           />
         </div>
-        <div class="flex-1">
-          <label for="time" class="mb-2 font-bold text-gray-700 dark:text-gray-300 block">Time</label>
+
+        <!-- Description -->
+        <div class="flex flex-col mb-2">
+          <label
+            for="description"
+            class="mb-2 font-bold text-gray-700 dark:text-gray-300"
+            >Description</label
+          >
+          <textarea
+            name="desc"
+            class="p-2 rounded-md border border-gray-300 dark:border-gray-700"
+            id="description"
+            placeholder="Description"
+          ></textarea>
+        </div>
+
+        <!-- Status -->
+        <div class="flex flex-col mb-2">
+          <label
+            for="status"
+            class="mb-2 font-bold text-gray-700 dark:text-gray-300"
+            >Status</label
+          >
+          <select
+            name="status"
+            class="p-2 rounded-md border border-gray-300 dark:border-gray-700"
+            id="status"
+          >
+            <option value="todo">Todo</option>
+            <option value="doing">Doing</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+
+        <!-- Date and Time -->
+        <div class="flex flex-col md:flex-row gap-4 mb-2">
+          <div class="flex-1">
+            <label
+              for="date"
+              class="mb-2 font-bold text-gray-700 dark:text-gray-300 block"
+              >Date</label
+            >
+            <input
+              class="p-2 rounded-md border border-gray-300 dark:border-gray-700 w-full"
+              type="date"
+              name="date"
+              id="date"
+            />
+          </div>
+          <div class="flex-1">
+            <label
+              for="time"
+              class="mb-2 font-bold text-gray-700 dark:text-gray-300 block"
+              >Time</label
+            >
+            <input
+              class="p-2 rounded-md border border-gray-300 dark:border-gray-700 w-full"
+              type="time"
+              name="time"
+              id="time"
+            />
+          </div>
+        </div>
+
+        <!-- Priority -->
+        <div class="flex flex-col mb-2">
+          <label
+            for="priority"
+            class="mb-2 font-bold text-gray-700 dark:text-gray-300"
+            >Priority</label
+          >
+          <select
+            name="priority"
+            class="p-2 rounded-md border border-gray-300 dark:border-gray-700"
+            id="priority"
+          >
+            <option value="p1" class="text-red-800 bg-red-500">P1</option>
+            <option value="p2" class="text-orange-800 bg-orange-500">P2</option>
+            <option value="p3" class="text-green-800 bg-green-500">P3</option>
+          </select>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex justify-between items-center">
           <input
-            class="p-2 rounded-md border border-gray-300 dark:border-gray-700 w-full"
-            type="time"
-            name="time"
-            id="time"
-             
+            class="text-white bg-violet-600 hover:bg-violet-700 px-4 py-2 rounded-md text-sm font-medium cursor-pointer"
+            type="submit"
+            id="submit-task"
+            value="Submit Tasks"
+          />
+          <input
+            class="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-sm font-medium cursor-pointer"
+            type="reset"
+            value="Reset"
           />
         </div>
-      </div>
-  
-      <!-- Priority -->
-      <div class="flex flex-col mb-2">
-        <label for="priority" class="mb-2 font-bold text-gray-700 dark:text-gray-300">Priority</label>
-        <select
-          name="priority"
-          class="p-2 rounded-md border border-gray-300 dark:border-gray-700"
-          id="priority"
-           
-        >
-          <option value="p1" class="text-red-800 bg-red-500">P1</option>
-          <option value="p2" class="text-orange-800 bg-orange-500">P2</option>
-          <option value="p3" class="text-green-800 bg-green-500">P3</option>
-        </select>
-      </div>
-  
-      <!-- Buttons -->
-      <div class="flex justify-between items-center">
-        <input
-          class="text-white bg-violet-600 hover:bg-violet-700 px-4 py-2 rounded-md text-sm font-medium cursor-pointer"
-          type="submit"
-          id="submit-task"
-          value="Submit Tasks"
-        />
-        <input
-          class="text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md text-sm font-medium cursor-pointer"
-          type="reset"
-          value="Reset"
-        />
-      </div>
-    </form>
-  </section>
+      </form>
+    </section>
     <!-- -------------   form section  end  -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <main
-    id="sections-container"
+      id="sections-container"
       class="max-w-screen-xl mt-14 bg-slate-100 dark:bg-slate-900 mx-auto p-4 flex justify-between gap-4 rounded"
     >
       <section
         id="todo"
+        ondragover="allowDrop(event)"
+        ondrop="drop(event)"
+
         class="bg-slate-200 p-2 dark:bg-gray-700 flex-1 rounded"
       >
-        <div class="flex justify-between items-center border-b-2 border-slate-600 mb-5">
+        <div
+          class="flex justify-between items-center border-b-2 border-slate-600 mb-5"
+        >
           <h2>To Do</h2>
           <p>counter: <span id="todo-counter">3</span></p>
         </div>
 
-        <div class="cards min-h-52">
-         
-        
-         
-        </div>
+        <div class="cards min-h-52"></div>
       </section>
 
       <section
         id="doing"
+        ondragover="allowDrop(event)"
+        ondrop="drop(event)"
+
         class="bg-slate-200 p-2 dark:bg-gray-700 flex-1 rounded"
       >
-      <div class="flex justify-between items-center border-b-2 border-slate-600 mb-5">
-        <h2>To Do</h2>
-        <p>counter: <span id="doing-counter">3</span></p>
-      </div>
+        <div
+          class="flex justify-between items-center border-b-2 border-slate-600 mb-5"
+        >
+          <h2>To Do</h2>
+          <p>counter: <span id="doing-counter">3</span></p>
+        </div>
 
-      <div class="cards">
-       
-      
-       
-      </div>
+        <div class="cards"></div>
       </section>
-
 
       <section
         id="done"
-        class="bg-slate-200 p-2 dark:bg-gray-700 flex-1 rounded "
+        ondragover="allowDrop(event)"
+        ondrop="drop(event)"
+        class="bg-slate-200 p-2 dark:bg-gray-700 flex-1 rounded"
       >
-      <div class="flex justify-between items-center border-b-2 border-slate-600 mb-5">
-        <h2>To Do</h2>
-        <p>counter: <span id="done-counter">3</span></p>
-      </div>
+        <div
+          class="flex justify-between items-center border-b-2 border-slate-600 mb-5"
+        >
+          <h2>To Do</h2>
+          <p>counter: <span id="done-counter">3</span></p>
+        </div>
 
-      <div class="cards">
-       
-      
-       
-      </div>
+        <div class="cards"></div>
       </section>
     </main>
 
@@ -297,15 +293,37 @@
 
     <script type="module" src="./main.js"></script>
     <script>
-      //       document.addEventListener('DOMContentLoaded', () => {
-      //     const burger = document.querySelector('.burger');
-      //     const nav = document.querySelector('.nav-links');
+      function allowDrop(ev) {
+        ev.preventDefault();
+      }
+      function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+      }
 
-      //     burger.addEventListener('click', () => {
-      //         nav.classList.toggle('nav-active');
-      //         burger.classList.toggle('toggle');
-      //     });
-      // });
+      function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+
+        const id = data.replace("card","")
+        const oldState = document.getElementById(data)
+        console.log(oldState);
+        
+        const newState = ev.target.id;
+
+
+        
+
+        
+        for (let key in tasks) {
+
+          let currentTask = tasks[key].find( task => task.id == id)
+          console.log(currentTask);
+          
+
+        }
+      }
+
     </script>
   </body>
 </html>
