@@ -2,6 +2,10 @@ import "./style.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { v4 as uuidv4 } from "uuid";
 
+// 
+
+import { tasks } from "./models/tasks";
+import "./models/dark-mode.js"
 // counter
 function updateCounter() {
   document.getElementById("todo-counter").textContent = tasks.todo.length;
@@ -40,29 +44,7 @@ document.getElementById("submit-task").addEventListener("click", function () {
   document.getElementById("sections-container").style.opacity = 1;
 });
 
-// dark mode stuff
-// Check and apply the user's stored preference or the system preference on page load
-if (
-  localStorage.theme === "dark" ||
-  (!("theme" in localStorage) &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches)
-) {
-  document.documentElement.classList.add("dark");
-} else {
-  document.documentElement.classList.remove("dark");
-}
 
-// User actions to explicitly choose themes
-function toggleTheme(isDark) {
-  localStorage.theme = isDark ? "dark" : "light"; // Save preference
-  document.documentElement.classList.toggle("dark", isDark);
-}
-
-const darkModeBtn = document.getElementById("dark-mode");
-darkModeBtn.addEventListener("click", () => {
-  const isDark = !document.documentElement.classList.contains("dark");
-  toggleTheme(isDark);
-});
 
 // DOM variables
 const submitBtn = document.querySelector("#submit-task");
@@ -75,26 +57,7 @@ const date = document.getElementById("date");
 const time = document.getElementById("time");
 const priority = document.getElementById("priority");
 
-let tasks = localStorage.getItem("tasks");
-if (!tasks) {
-  tasks = {
-    todo: [
-      {
-        id: "1",
-        title: "gym",
-        description: "go to the gym and workout legs",
-        status: "todo",
-        date: "2024-10-29",
-        time: "12:55:44",
-        priority: "p1",
-      },
-    ],
-    doing: [],
-    done: [],
-  };
-} else {
-  tasks = JSON.parse(tasks);
-}
+
 
 // show data function:
 function showData() {
@@ -232,43 +195,3 @@ document.querySelectorAll(".card").forEach( (element)=>{
 
   })
 } )
-
-
-document.querySelectorAll("main > section").forEach( element =>{
-  element.addEventListener("ondragover",(ev)=>{
-    allowDrop(ev)
-  })
-  element.addEventListener("ondrop",(ev)=>{
-    drop(ev)
-  })
-})
-function allowDrop(ev) {
-  ev.preventDefault();
-}
-function drag(ev) {
-  ev.dataTransfer.setData("text", ev.target.id);
-}
-
-function drop(ev) {
-  ev.preventDefault();
-  var data = ev.dataTransfer.getData("text");
-  ev.target.appendChild(document.getElementById(data));
-
-  const id = data.replace("card","")
-  const oldState = document.getElementById(data)
-  console.log(oldState);
-  
-  const newState = ev.target.id;
-
-
-  
-
-  
-  for (let key in tasks) {
-
-    let currentTask = tasks[key].find( task => task.id == id)
-    console.log(currentTask);
-    
-
-  }
-}

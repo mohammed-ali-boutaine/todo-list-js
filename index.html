@@ -241,7 +241,6 @@
         id="todo"
         ondragover="allowDrop(event)"
         ondrop="drop(event)"
-
         class="bg-slate-200 p-2 dark:bg-gray-700 flex-1 rounded"
       >
         <div
@@ -258,7 +257,6 @@
         id="doing"
         ondragover="allowDrop(event)"
         ondrop="drop(event)"
-
         class="bg-slate-200 p-2 dark:bg-gray-700 flex-1 rounded"
       >
         <div
@@ -293,6 +291,28 @@
 
     <script type="module" src="./main.js"></script>
     <script>
+      let tasks = localStorage.getItem("tasks");
+
+      if (!tasks) {
+        tasks = {
+          todo: [
+            {
+              id: "1",
+              title: "gym",
+              description: "go to the gym and workout legs",
+              status: "todo",
+              date: "2024-10-29",
+              time: "12:55:44",
+              priority: "p1",
+            },
+          ],
+          doing: [],
+          done: [],
+        };
+      } else {
+        tasks = JSON.parse(tasks);
+      }
+
       function allowDrop(ev) {
         ev.preventDefault();
       }
@@ -305,25 +325,30 @@
         var data = ev.dataTransfer.getData("text");
         ev.target.appendChild(document.getElementById(data));
 
-        const id = data.replace("card","")
-        const oldState = document.getElementById(data)
-        console.log(oldState);
-        
+        const id = data.replace("card", "");
+        const oldState = document.getElementById(data);
+
         const newState = ev.target.id;
+        console.log(newState);
 
-
-        
-
-        
         for (let key in tasks) {
+          let taskIndex = tasks[key].findIndex((task) => task.id == id);
 
-          let currentTask = tasks[key].find( task => task.id == id)
-          console.log(currentTask);
-          
+          // If the task is found in the current state, proceed to update
+          if (taskIndex !== -1) {
+            const currentTask = tasks[key][taskIndex];
+            // console.log("task: ",tasks[key][taskIndex]);
+            console.log("task: ", currentTask);
 
+            tasks[newState].push(currentTask);
+            // Remove the task from the old state
+            tasks[key].splice(taskIndex, 1);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+
+            break;
+          }
         }
       }
-
     </script>
   </body>
 </html>
